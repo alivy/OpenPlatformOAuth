@@ -1,0 +1,116 @@
+﻿@{
+    Layout = null;
+    var NickName = ViewData["NickName"] ?? "";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>QQ第三方登录</title>
+    <style type="text/css">
+        .auth-linktitle {
+            margin-bottom: 50px;
+            width: 256px;
+            margin: auto;
+            line-height: 1em;
+            font-size: 18px;
+            font-weight: 600;
+            color: #8da0aa;
+            background: #fafcfe;
+        }
+
+        .auth-link {
+            margin: 0 5px;
+            text-indent: -99999em;
+            background: url(/Content/image/icon-auth.6998d4.png) no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            opacity: .7;
+            -ms-filter: alpha(opacity=70);
+            transition: opacity .3s;
+        }
+
+        .qq {
+            background-position: -40px -60px;
+        }
+
+
+        #QQAuthorize {
+            position: absolute;
+            left: 50%;
+            top: 25%;
+            display: none;
+            width: 40rem;
+            height: 24rem;
+            margin-left: -20rem;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .lay_top {
+            display: none;
+        }
+
+        iframe::-webkit-scrollbar {
+            width: 0px;
+            height: 0px;
+        }
+    </style>
+    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
+
+  
+
+    <script>
+        $(function () {
+            $(".auth-link").click(function () {
+                 $("#QQAuthorize").show();
+                var https ="@ViewData["AuthorizeUrl"]";
+                $("#QQAuthorize").attr("src", https.replace(new RegExp("amp;", "g"), ""));
+            })
+        })
+    </script>
+
+
+
+</head>
+<body>
+
+    @{
+        if (!string.IsNullOrEmpty(NickName.ToString()))
+        {
+            <script>
+                $(function () {
+                    window.parent.reload();
+                    $("#QQAuthorize").hide();
+                })
+            </script>
+        }
+    }
+
+    <div id="nav">
+        @if (!string.IsNullOrEmpty(NickName.ToString()))
+        {
+            <span>欢迎您,@NickName</span>
+        }
+    </div>
+
+
+    <div style="width: 700px;margin: auto;text-align: center;margin-top: 100px">
+        <h2 class="auth-linktitle">可使用以下账号直接登录</h2><br />
+        <a class="auth-link qq" target="_blank">QQ</a>
+    </div>
+    <div>
+        <iframe id="QQAuthorize" style="border:2px solid #eee;" src=""></iframe>
+    </div>
+
+    <div>
+        <iframe id="QQeasy" style="border:2px solid #eee;" src=""></iframe>
+    </div>
+
+    https://xui.ptlogin2.qq.com/cgi-bin/xlogin?target=self&appid=101485789&daid=4&s_url=https://mail.qq.com/cgi-bin/readtemplate?check=false%26t=loginpage_new_jump%26vt=passport%26vm=wpt%26ft=loginpage%26target=&style=25&low_login=1&proxy_url=https://mail.qq.com/proxy.html&need_qr=0&hide_border=1&border_radius=0&self_regurl=http://zc.qq.com/chs/index.html?type=1&app_id=11005?t=regist&pt_feedback_link=http://support.qq.com/discuss/350_1.shtml&css=https://res.mail.qq.com/zh_CN/htmledition/style/ptlogin_input24e6b9.css&pt_no_auth=1
+</body>
+</html>

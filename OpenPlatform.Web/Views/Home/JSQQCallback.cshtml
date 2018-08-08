@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "JSQQCallback";
+}
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title> QQConnect JSDK - redirectURI </title>
+    <script src="~/Scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101485789" data-redirecturi="http://192.168.1.60:803/Home/JSQQCallback" charset="utf-8"></script>
+
+    <style type="text/css">
+        html, body {
+            font-size: 14px;
+            line-height: 180%;
+        }
+    </style>
+
+</head>
+<body onload="getInfo()">
+
+    <div>
+        <h3>数据传输中，请稍后...</h3>
+        <div>
+            <span id="name">
+
+            </span>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+<script type="text/javascript">
+            function getInfo() {
+                if(QC.Login.check()){
+                    QC.api("get_user_info")
+                        .success(function(s){//成功回调
+                            QC.Login.getMe(function (openId, accessToken) {
+                                console.log(s.data.nickname + openId + accessToken);
+                                location.href = "/Home/JSQQ?name=" + s.data.nickname;
+                                $("#name").html(s.data.nickname);
+                            })
+                        })
+                        .error(function(f){//失败回调
+                            alert("获取用户信息失败！登录失败！");
+                            location.href = "/Home/JSQQ";
+                        })
+                        .complete(function(c){//完成请求回调
+                        //	alert("获取用户信息完成！");
+                        });
+                }else{
+                    alert("请登录！");
+                    location.href = "/Home/JSQQ";
+                }
+            }
+</script>
+

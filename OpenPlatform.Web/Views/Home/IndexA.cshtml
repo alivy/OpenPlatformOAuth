@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "IndexA";
+    var NickName = ViewData["NickName"] ?? "";
+}
+<style type="text/css">
+    .auth-linktitle {
+        margin-bottom: 50px;
+        width: 256px;
+        margin: auto;
+        line-height: 1em;
+        font-size: 18px;
+        font-weight: 600;
+        color: #8da0aa;
+        background: #fafcfe;
+    }
+
+    .auth-link {
+        margin: 0 5px;
+        text-indent: -99999em;
+        background: url(/Content/image/icon-auth.6998d4.png) no-repeat;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        opacity: .7;
+        -ms-filter: alpha(opacity=70);
+        transition: opacity .3s;
+    }
+
+    .qq {
+        background-position: -40px -60px;
+    }
+
+
+    #QQAuthorize {
+        position: absolute;
+        left: 50%;
+        top: 25%;
+        display: none;
+        width: 40rem;
+        height: 24rem;
+        margin-left: -20rem;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .lay_top {
+        display: none;
+    }
+
+    iframe::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+</style>
+
+
+<div id="nav">
+    @if (!string.IsNullOrEmpty(NickName.ToString()))
+    {
+        <span>欢迎您,@NickName</span>
+    }
+</div>
+
+
+<div style="width: 700px;margin: auto;text-align: center;margin-top: 100px">
+    <h2 class="auth-linktitle">可使用以下账号直接登录</h2><br />
+    <a class="auth-link qq" target="_blank">QQ</a>
+</div>
+
+<script src="~/Scripts/jquery-1.8.3.min.js"></script>
+<link href="~/Content/layui-v2.3.0/layui/css/layui.css" rel="stylesheet" />
+<script src="~/Content/layui-v2.3.0/layui/layui.js"></script>
+<script src="~/Content/layui-v2.3.0/layui/layui.all.js"></script>
+<script>
+    $(function () {
+
+    })
+</script>
+<script>
+
+    $(".auth-link").click(function () {
+                var https ="@ViewData["AuthorizeUrl"]";
+                layer.open({
+                    type: 2,
+                    content: https.replace(new RegExp("amp;", "g"), ""),
+                    success: function (layero, index) {
+                        if ("@NickName" != "") {
+                            console.log(layero, index);
+                            layer.closeAll(); //疯狂模式，关闭所有层
+                        }
+
+                    },
+                });
+    });
+
+    function sonsay(obj)
+    {
+        var name = obj.Nickname;
+        $("#QQAuthorize").hide();
+    } 
+</script>
+
