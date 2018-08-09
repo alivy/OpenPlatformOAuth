@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPlatform.Tool", "OpenPl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFTest", "EFTest\EFTest.csproj", "{F252539C-842C-4343-8B7B-A0CB78D26E25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.Utilities", "EntityFramework.Utilities\EntityFramework.Utilities.csproj", "{C3211BAC-13F0-42A7-924C-34BB0EE77914}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F252539C-842C-4343-8B7B-A0CB78D26E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F252539C-842C-4343-8B7B-A0CB78D26E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F252539C-842C-4343-8B7B-A0CB78D26E25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3211BAC-13F0-42A7-924C-34BB0EE77914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3211BAC-13F0-42A7-924C-34BB0EE77914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3211BAC-13F0-42A7-924C-34BB0EE77914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3211BAC-13F0-42A7-924C-34BB0EE77914}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

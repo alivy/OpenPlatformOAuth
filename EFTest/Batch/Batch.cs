@@ -12,6 +12,10 @@ namespace EFTest.Batch
 {
     public class Batch
     {
+        /// <summary>
+        /// There is already a repository named 'OpenPlatformOAuth2' for the current account.
+        /// </summary>
+        /// <returns></returns>
         private static IEnumerable<User_info> GetInsertDatas()
         {
             // 线程安全的list
