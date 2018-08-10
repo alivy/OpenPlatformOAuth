@@ -1,4 +1,4 @@
-namespace EFTest.Model
+namespace Model
 {
     using System;
     using System.Collections.Generic;
@@ -25,6 +25,6 @@ namespace EFTest.Model
         [StringLength(100)]
         public string Remark { get; set; }
 
-        public int UserRole { get; set; }
+        public int? UserRole { get; set; }
     }
 }

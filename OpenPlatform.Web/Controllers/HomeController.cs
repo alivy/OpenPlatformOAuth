@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Xml;
+using Model;
 using OpenPlatform.Tool;
 using OpenPlatform.Tool.Commom;
 using OpenPlatform.Tool.OAuthClient.TencentQQ;
@@ -38,42 +39,13 @@ namespace OpenPlatform.Web.Controllers
 
 
 
-        public ActionResult IndexA()
+        public ActionResult Index()
         {
             //第一步：获取开放平台授权地址
             string authorizeUrl = oauthClient.GetAuthorizeUrl(ResponseType.Code);
             ViewData["AuthorizeUrl"] = authorizeUrl;
-
-            if (!string.IsNullOrEmpty(nickName))
-            {
-                ViewData["NickName"] = nickName;
-                ViewData["result"] = true;
-            }
             return View();
         }
-
-
-        public ActionResult JSQQ(string name = "")
-        {
-            //第一步：获取开放平台授权地址
-            string authorizeUrl = oauthClient.GetAuthorizeUrl(ResponseType.Code);
-            //ViewData["AuthorizeUrl"] = authorizeUrl;
-            ViewData["name"] = name;
-            return View();
-        }
-        public ActionResult JSQQCallback(string name, string openid, string otype, string token)
-        {
-            return View();
-        }
-
-
-        public ActionResult Labe()
-        {
-
-
-            return View();
-        }
-       
 
         /// <summary>
         /// 回调地址
@@ -89,92 +61,35 @@ namespace OpenPlatform.Web.Controllers
             if (accessToken == null)
             {
                 return Content("认证失败");
-            
+
             }
-            nickName = oauthClient.Token.User.Nickname;
-            string openId = oauthClient.Token.OAuthId;
-            string AvatarUrl = oauthClient.Token.User.AvatarUrl;
-            string responseResult = oauthClient.Token.TraceInfo;
-
-
-            dynamic userInfo = DynamicHelper.FromJSON(responseResult);
-            var info = XMLSerializeHelper.XmlDeserializeFromFile<List<UserInfo>>(xmlDataPath);
-            StringBuilder str = new StringBuilder();
-            if (info != null && !info.Where(s => s.OpenId == openId).Any())
+            var db = DBContext.CreateContext();
+            var user = db.QQUser_info.Where(x => x.openId.Contains(oauthClient.Token.OAuthId)).FirstOrDefault();
+            if (user == null)
             {
-                #region 保存数据
-                ////提取xml文档
-                //XmlDocument xd = new XmlDocument();
-                //xd.Load(xmlDataPath);
-                ////获取根节点
-                //XmlNode root = xd.DocumentElement;
-                ////创建元素
-                //XmlElement newItem = xd.CreateElement("UserInfo");
-                //newItem.AppendChild(newItem);
-                //XmlElement newOpenId = xd.CreateElement("OpenId");
-                //XmlElement newNickName = xd.CreateElement("Nickname");
-                //XmlElement figureurl_2 = xd.CreateElement("figureurl_2");
-                ////设置内容
-                //newOpenId.InnerText = openId;
-                //newNickName.InnerText = nickName;
-                //figureurl_2.InnerText = userInfo.figureurl_2;
-                ////添加节点
-                //root.AppendChild(newItem);
-                //newItem.AppendChild(newOpenId);
-                //newItem.AppendChild(newNickName);
-                //newItem.AppendChild(figureurl_2);
-                ////保存xml文档
-                //xd.Save(Server.MapPath(xmlDataPath));
-
-                #endregion
+                user = new QQUser_info
+                {
+                    nickname = oauthClient.Token.User.Nickname,
+                    openId = oauthClient.Token.OAuthId,
+                    figureurl = oauthClient.Token.User.AvatarUrl,
+                    gender = oauthClient.Token.User.Sex,
+                };
+                db.QQUser_info.Add(user);
+                db.SaveChanges();
+                StringBuilder str = new StringBuilder();
                 str.AppendLine("<h2>恭喜您,QQ认证成功 </h2><br />");
                 str.AppendLine("****************获取信息begin**************** <br />");
                 str.AppendLine("获取到您的昵称:" + nickName + "大智障 <br />");
-                str.AppendLine("获取到您的openId:" + openId + "  <br />");
-                str.AppendLine("获取到您的头像: <img src=" + AvatarUrl + "  />  <br /> ");
+                str.AppendLine("获取到您的openId:" + user.openId + "  <br />");
+                str.AppendLine("获取到您的头像: <img src=" + user.figureurl + "  />  <br /> ");
                 str.AppendLine("****************获取信息end**************** <br /> ");
+
             }
-            ViewBag.user = oauthClient.Token.User;
+            ViewBag.user = user;
             return View();
         }
 
-        /// <summary>
-        /// 指定Post地址使用Get 方式获取全部字符串
-        /// </summary>
-        /// <param name="url">请求后台地址</param>
-        /// <returns></returns>
-        public static string Post(string url, Dictionary<string, string> dic)
-        {
-            string result = "";
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            req.Method = "POST";
-            req.ContentType = "application/x-www-form-urlencoded";
-            #region  添加Post参数
-            StringBuilder builder = new StringBuilder();
-            int i = 0;
-            foreach (var item in dic)
-            {
-                if (i > 0)
-                    builder.Append("&");
-                builder.AppendFormat("{0}={1}", item.Key, item.Value);
-                i++;
-            }
-            byte[] data = Encoding.UTF8.GetBytes(builder.ToString());
-            req.ContentLength = data.Length;
-            using (Stream reqStream = req.GetRequestStream())
-            {
-                reqStream.Write(data, 0, data.Length);
-                reqStream.Close();
-            }
-            #endregion
-            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-            Stream stream = resp.GetResponseStream();
-            //获取响应内容
-            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
-            {
-                result = reader.ReadToEnd();
-            }
-            return result;
-        }
+
+
     }
 }

@@ -1,4 +1,4 @@
-namespace EFTest.Model
+namespace Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,20 +6,21 @@ namespace EFTest.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Sys_ModuleFormInstance
+    public partial class Sys_RoleAuthorize
     {
         [Key]
         [StringLength(50)]
         public string F_Id { get; set; }
 
-        [Required]
+        public int? F_ItemType { get; set; }
+
         [StringLength(50)]
-        public string F_FormId { get; set; }
+        public string F_ItemId { get; set; }
+
+        public int? F_ObjectType { get; set; }
 
         [StringLength(50)]
         public string F_ObjectId { get; set; }
-
-        public string F_InstanceJson { get; set; }
 
         public int? F_SortCode { get; set; }
 

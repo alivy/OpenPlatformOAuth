@@ -1,4 +1,4 @@
-namespace EFTest.Model
+namespace Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,30 +6,28 @@ namespace EFTest.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Sys_ItemsDetail
+    public partial class Sys_DbBackup
     {
         [Key]
         [StringLength(50)]
         public string F_Id { get; set; }
 
         [StringLength(50)]
-        public string F_ItemId { get; set; }
+        public string F_BackupType { get; set; }
 
         [StringLength(50)]
-        public string F_ParentId { get; set; }
+        public string F_DbName { get; set; }
 
         [StringLength(50)]
-        public string F_ItemCode { get; set; }
+        public string F_FileName { get; set; }
 
         [StringLength(50)]
-        public string F_ItemName { get; set; }
+        public string F_FileSize { get; set; }
 
         [StringLength(500)]
-        public string F_SimpleSpelling { get; set; }
+        public string F_FilePath { get; set; }
 
-        public bool? F_IsDefault { get; set; }
-
-        public int? F_Layers { get; set; }
+        public DateTime? F_BackupTime { get; set; }
 
         public int? F_SortCode { get; set; }
 
@@ -52,7 +50,7 @@ namespace EFTest.Model
 
         public DateTime? F_DeleteTime { get; set; }
 
-        [StringLength(50)]
+        [StringLength(500)]
         public string F_DeleteUserId { get; set; }
     }
 }

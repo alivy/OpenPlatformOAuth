@@ -1,4 +1,4 @@
-namespace EFTest.Model
+namespace Model
 {
     using System;
     using System.Data.Entity;
@@ -21,6 +21,7 @@ namespace EFTest.Model
             return new DBContext();
         }
         #endregion
+
         public virtual DbSet<QQUser_info> QQUser_info { get; set; }
         public virtual DbSet<Sys_Area> Sys_Area { get; set; }
         public virtual DbSet<Sys_DbBackup> Sys_DbBackup { get; set; }

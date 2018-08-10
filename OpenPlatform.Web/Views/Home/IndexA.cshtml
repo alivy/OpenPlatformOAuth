@@ -77,7 +77,6 @@
     })
 </script>
 <script>
-
     $(".auth-link").click(function () {
                 var https ="@ViewData["AuthorizeUrl"]";
                 layer.open({
@@ -91,11 +90,11 @@
 
                     },
                 });
-    });
-
+    })
     function sonsay(obj)
     {
-        var name = obj.Nickname;
+        console.log("接受儿子发送数据" + obj);
+        var name = obj;
         $("#QQAuthorize").hide();
     } 
 </script>

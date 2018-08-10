@@ -41,6 +41,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -235,6 +241,10 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{69115c96-62c2-4484-8535-244a8d96802f}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenPlatform.Tool\OpenPlatform.Tool.csproj">
       <Project>{0f36c3ea-70a7-4960-b46a-f4200f2c9504}</Project>
       <Name>OpenPlatform.Tool</Name>
@@ -253,7 +263,6 @@
     <Content Include="Views\Home\IndexA.cshtml" />
     <Content Include="Views\Home\JSQQ.cshtml" />
     <Content Include="Views\Home\JSQQCallback.cshtml" />
-    <Content Include="Views\Home\Labe.cshtml" />
     <Content Include="Views\Home\QQLoginCallback.cshtml" />
   </ItemGroup>
   <PropertyGroup>

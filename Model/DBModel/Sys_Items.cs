@@ -1,4 +1,4 @@
-namespace EFTest.Model
+namespace Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +6,14 @@ namespace EFTest.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Sys_Role
+    public partial class Sys_Items
     {
         [Key]
         [StringLength(50)]
         public string F_Id { get; set; }
 
         [StringLength(50)]
-        public string F_OrganizeId { get; set; }
-
-        public int? F_Category { get; set; }
+        public string F_ParentId { get; set; }
 
         [StringLength(50)]
         public string F_EnCode { get; set; }
@@ -23,12 +21,9 @@ namespace EFTest.Model
         [StringLength(50)]
         public string F_FullName { get; set; }
 
-        [StringLength(50)]
-        public string F_Type { get; set; }
+        public bool? F_IsTree { get; set; }
 
-        public bool? F_AllowEdit { get; set; }
-
-        public bool? F_AllowDelete { get; set; }
+        public int? F_Layers { get; set; }
 
         public int? F_SortCode { get; set; }
 
@@ -51,7 +46,7 @@ namespace EFTest.Model
 
         public DateTime? F_DeleteTime { get; set; }
 
-        [StringLength(500)]
+        [StringLength(50)]
         public string F_DeleteUserId { get; set; }
     }
 }

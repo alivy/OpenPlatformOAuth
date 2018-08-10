@@ -1,4 +1,4 @@
-namespace EFTest.Model
+namespace Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +6,16 @@ namespace EFTest.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class User_Type
+    public partial class User_Organize
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int UserType_ID { get; set; }
+        [StringLength(50)]
+        public string OrganizeCode { get; set; }
 
         [StringLength(50)]
-        public string UserType_Name { get; set; }
+        public string OrganizeName { get; set; }
 
         [StringLength(50)]
-        public string Remark { get; set; }
+        public string ParentCode { get; set; }
     }
 }

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EFTest
+﻿namespace EFTest
 {
     class Program
     {
         static void Main(string[] args)
         {
             //Batch.Batch.BatchInster();
-            //Batch.Batch.BatchUpdate();
+            Batch.Batch.BatchUpdate();
         }
     }
 }

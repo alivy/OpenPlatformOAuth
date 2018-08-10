@@ -1,4 +1,4 @@
-namespace EFTest.Model
+namespace Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@ namespace EFTest.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Sys_Module
+    public partial class Sys_Organize
     {
         [Key]
         [StringLength(50)]
@@ -24,19 +24,34 @@ namespace EFTest.Model
         public string F_FullName { get; set; }
 
         [StringLength(50)]
-        public string F_Icon { get; set; }
-
-        [StringLength(500)]
-        public string F_UrlAddress { get; set; }
+        public string F_ShortName { get; set; }
 
         [StringLength(50)]
-        public string F_Target { get; set; }
+        public string F_CategoryId { get; set; }
 
-        public bool? F_IsMenu { get; set; }
+        [StringLength(50)]
+        public string F_ManagerId { get; set; }
 
-        public bool? F_IsExpand { get; set; }
+        [StringLength(20)]
+        public string F_TelePhone { get; set; }
 
-        public bool? F_IsPublic { get; set; }
+        [StringLength(20)]
+        public string F_MobilePhone { get; set; }
+
+        [StringLength(50)]
+        public string F_WeChat { get; set; }
+
+        [StringLength(20)]
+        public string F_Fax { get; set; }
+
+        [StringLength(50)]
+        public string F_Email { get; set; }
+
+        [StringLength(50)]
+        public string F_AreaId { get; set; }
+
+        [StringLength(500)]
+        public string F_Address { get; set; }
 
         public bool? F_AllowEdit { get; set; }
 
@@ -63,7 +78,7 @@ namespace EFTest.Model
 
         public DateTime? F_DeleteTime { get; set; }
 
-        [StringLength(50)]
+        [StringLength(500)]
         public string F_DeleteUserId { get; set; }
     }
 }

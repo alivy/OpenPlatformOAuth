@@ -1,4 +1,4 @@
-namespace EFTest.Model
+namespace Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +6,16 @@ namespace EFTest.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Sys_Organize
+    public partial class Sys_Role
     {
         [Key]
         [StringLength(50)]
         public string F_Id { get; set; }
 
         [StringLength(50)]
-        public string F_ParentId { get; set; }
+        public string F_OrganizeId { get; set; }
 
-        public int? F_Layers { get; set; }
+        public int? F_Category { get; set; }
 
         [StringLength(50)]
         public string F_EnCode { get; set; }
@@ -24,34 +24,7 @@ namespace EFTest.Model
         public string F_FullName { get; set; }
 
         [StringLength(50)]
-        public string F_ShortName { get; set; }
-
-        [StringLength(50)]
-        public string F_CategoryId { get; set; }
-
-        [StringLength(50)]
-        public string F_ManagerId { get; set; }
-
-        [StringLength(20)]
-        public string F_TelePhone { get; set; }
-
-        [StringLength(20)]
-        public string F_MobilePhone { get; set; }
-
-        [StringLength(50)]
-        public string F_WeChat { get; set; }
-
-        [StringLength(20)]
-        public string F_Fax { get; set; }
-
-        [StringLength(50)]
-        public string F_Email { get; set; }
-
-        [StringLength(50)]
-        public string F_AreaId { get; set; }
-
-        [StringLength(500)]
-        public string F_Address { get; set; }
+        public string F_Type { get; set; }
 
         public bool? F_AllowEdit { get; set; }
 

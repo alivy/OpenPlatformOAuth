@@ -1,4 +1,4 @@
-namespace EFTest.Model
+namespace Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,14 +6,11 @@ namespace EFTest.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Sys_ModuleButton
+    public partial class Sys_Module
     {
         [Key]
         [StringLength(50)]
         public string F_Id { get; set; }
-
-        [StringLength(50)]
-        public string F_ModuleId { get; set; }
 
         [StringLength(50)]
         public string F_ParentId { get; set; }
@@ -29,15 +26,15 @@ namespace EFTest.Model
         [StringLength(50)]
         public string F_Icon { get; set; }
 
-        public int? F_Location { get; set; }
-
-        [StringLength(50)]
-        public string F_JsEvent { get; set; }
-
         [StringLength(500)]
         public string F_UrlAddress { get; set; }
 
-        public bool? F_Split { get; set; }
+        [StringLength(50)]
+        public string F_Target { get; set; }
+
+        public bool? F_IsMenu { get; set; }
+
+        public bool? F_IsExpand { get; set; }
 
         public bool? F_IsPublic { get; set; }
 

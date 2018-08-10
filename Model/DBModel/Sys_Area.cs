@@ -1,4 +1,4 @@
-namespace EFTest.Model
+namespace Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,19 +6,25 @@ namespace EFTest.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Sys_FilterIP
+    public partial class Sys_Area
     {
         [Key]
         [StringLength(50)]
         public string F_Id { get; set; }
 
-        public bool? F_Type { get; set; }
+        [StringLength(50)]
+        public string F_ParentId { get; set; }
+
+        public int? F_Layers { get; set; }
 
         [StringLength(50)]
-        public string F_StartIP { get; set; }
+        public string F_EnCode { get; set; }
 
         [StringLength(50)]
-        public string F_EndIP { get; set; }
+        public string F_FullName { get; set; }
+
+        [StringLength(50)]
+        public string F_SimpleSpelling { get; set; }
 
         public int? F_SortCode { get; set; }
 
@@ -41,7 +47,7 @@ namespace EFTest.Model
 
         public DateTime? F_DeleteTime { get; set; }
 
-        [StringLength(500)]
+        [StringLength(50)]
         public string F_DeleteUserId { get; set; }
     }
 }

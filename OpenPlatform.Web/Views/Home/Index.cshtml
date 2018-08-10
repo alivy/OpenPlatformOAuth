@@ -39,13 +39,12 @@
         }
 
 
-        #QQAuthorize {
+        #QQeasy {
             position: absolute;
-            left: 50%;
-            top: 25%;
-            display: none;
-            width: 40rem;
-            height: 24rem;
+            left: 55%;
+            top: -16%;
+            width: 35rem;
+            height: 25rem;
             margin-left: -20rem;
             overflow-y: scroll;
             overflow-x: hidden;
@@ -59,19 +58,41 @@
             width: 0px;
             height: 0px;
         }
+
+        #QQAuthorize {
+            display: none;
+            border: 2px solid #eee;
+            position: absolute;
+            left: 50%;
+            top: 25%;
+            width: 25rem;
+            height: 20rem;
+            margin-left: -20rem;
+            overflow: hidden;
+        }
+
+        .nav {
+            display: none;
+        }
     </style>
     <script src="~/Scripts/jquery-1.8.3.min.js"></script>
-
-  
-
     <script>
         $(function () {
             $(".auth-link").click(function () {
                  $("#QQAuthorize").show();
                 var https ="@ViewData["AuthorizeUrl"]";
-                $("#QQAuthorize").attr("src", https.replace(new RegExp("amp;", "g"), ""));
+                $("#QQeasy").attr("src", https.replace(new RegExp("amp;", "g"), ""));
             })
         })
+
+        function sonsay(Nickname,img) {
+            var name = Nickname;
+            $("#HeadPortrait").attr("src", img);
+            $("#nickname").text(name);
+            $(".nav").show();
+            $("#QQAuthorize").hide();
+            $("#QQLogin").hide();
+        };
     </script>
 
 
@@ -79,38 +100,18 @@
 </head>
 <body>
 
-    @{
-        if (!string.IsNullOrEmpty(NickName.ToString()))
-        {
-            <script>
-                $(function () {
-                    window.parent.reload();
-                    $("#QQAuthorize").hide();
-                })
-            </script>
-        }
-    }
-
-    <div id="nav">
-        @if (!string.IsNullOrEmpty(NickName.ToString()))
-        {
-            <span>欢迎您,@NickName</span>
-        }
+    <div class="nav">
+            欢迎您,<img id="HeadPortrait" src="" /> <span id="nickname"></span>
     </div>
 
 
-    <div style="width: 700px;margin: auto;text-align: center;margin-top: 100px">
+    <div style="width: 700px;margin: auto;text-align: center;margin-top: 100px" id="QQLogin">
         <h2 class="auth-linktitle">可使用以下账号直接登录</h2><br />
         <a class="auth-link qq" target="_blank">QQ</a>
     </div>
-    <div>
-        <iframe id="QQAuthorize" style="border:2px solid #eee;" src=""></iframe>
-    </div>
 
-    <div>
-        <iframe id="QQeasy" style="border:2px solid #eee;" src=""></iframe>
+    <div id="QQAuthorize" >
+        <iframe id="QQeasy" src=""></iframe>
     </div>
-
-    https://xui.ptlogin2.qq.com/cgi-bin/xlogin?target=self&appid=101485789&daid=4&s_url=https://mail.qq.com/cgi-bin/readtemplate?check=false%26t=loginpage_new_jump%26vt=passport%26vm=wpt%26ft=loginpage%26target=&style=25&low_login=1&proxy_url=https://mail.qq.com/proxy.html&need_qr=0&hide_border=1&border_radius=0&self_regurl=http://zc.qq.com/chs/index.html?type=1&app_id=11005?t=regist&pt_feedback_link=http://support.qq.com/discuss/350_1.shtml&css=https://res.mail.qq.com/zh_CN/htmledition/style/ptlogin_input24e6b9.css&pt_no_auth=1
 </body>
 </html>
