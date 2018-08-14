@@ -38,16 +38,16 @@ namespace EntityFramework.Utilities
     }
 
     /// <summary>
-    /// Represents the mapping of an entity to a table in the database
+    ///代表一个实体的映射到数据库中的一个表
     /// </summary>
     public class TableMapping
     {
         /// <summary>
-        /// The name of the table the entity is mapped to
+        /// 表的名称映射到的实体
         /// </summary>
         public string TableName { get; set; }
         /// <summary>
-        /// The schema of the table the entity is mapped to
+        /// 表的模式映射到的实体
         /// </summary>
         public string Schema { get; set; }
 
@@ -70,22 +70,22 @@ namespace EntityFramework.Utilities
     }
 
     /// <summary>
-    /// Represents the mapping of a property to a column in the database
+    /// 表示属性到数据库中列的映射
     /// </summary>
     public class PropertyMapping
     {
         /// <summary>
-        /// The property chain leading to this property. For scalar properties this is a single value but for Complex properties this is a dot (.) separated list
+        /// 通往这家酒店的物业链。对于标量属性，这是单个值，但对于复杂属性，这是一个点（。）分隔列表
         /// </summary>
         public string PropertyName { get; set; }
 
         /// <summary>
-        /// The column that property is mapped to
+        /// 属性映射到的列
         /// </summary>
         public string ColumnName { get; set; }
 
         /// <summary>
-        /// Used when we have TPH to exclude entities
+        /// 当我们有TPH来排除实体时使用
         /// </summary>
         public Type ForEntityType { get; set; }
 
@@ -102,12 +102,12 @@ namespace EntityFramework.Utilities
     public class EfMapping
     {
         /// <summary>
-        /// Mapping information for each entity type in the model
+        /// 映射模型中每个实体类型的信息
         /// </summary>
         public Dictionary<Type, TypeMapping> TypeMappings { get; set; }
 
         /// <summary>
-        /// Initializes an instance of the EfMapping class
+        /// 初始化Ef Mapping类的实例
         /// </summary>
         /// <param name="db">The context to get the mapping from</param>
         public EfMapping(DbContext db)
@@ -116,22 +116,22 @@ namespace EntityFramework.Utilities
 
             var metadata = ((IObjectContextAdapter)db).ObjectContext.MetadataWorkspace;
 
-            //EF61Test(metadata);
+            //EF61Test（元数据）;
 
-            // Conceptual part of the model has info about the shape of our entity classes
+            // 模型的概念部分包含有关实体类形状的信息
             var conceptualContainer = metadata.GetItems<EntityContainer>(DataSpace.CSpace).Single();
 
-            // Storage part of the model has info about the shape of our tables
+            //模型的存储部分包含有关表格形状的信息
             var storeContainer = metadata.GetItems<EntityContainer>(DataSpace.SSpace).Single();
 
-            // Object part of the model that contains info about the actual CLR types
+            // 模型的对象部分，包含有关实际CLR类型的信息
             var objectItemCollection = ((ObjectItemCollection)metadata.GetItemCollection(DataSpace.OSpace));
 
-            // Loop thru each entity type in the model
+            // 循环遍历模型中的每个实体类型
             foreach (var set in conceptualContainer.BaseEntitySets.OfType<EntitySet>())
             {
 
-                // Find the mapping between conceptual and storage model for this entity set
+                //查找此实体集的概念模型和存储模型之间的映射
                 var mapping = metadata.GetItems<EntityContainerMapping>(DataSpace.CSSpace)
                         .Single()
                         .EntitySetMappings
@@ -156,7 +156,9 @@ namespace EntityFramework.Utilities
                 tableMapping.TableName = mappingToLookAt.Fragments[0].StoreEntitySet.Table ?? mappingToLookAt.Fragments[0].StoreEntitySet.Name;
                 typeMapping.TableMappings.Add(tableMapping);
 
+#pragma warning disable IDE0039 // 使用本地函数
                 Action<Type, System.Data.Entity.Core.Mapping.PropertyMapping, string> recurse = null;
+#pragma warning restore IDE0039 // 使用本地函数
                 recurse = (t, item, path) =>
                 {
                     if (item is ComplexPropertyMapping)
@@ -181,7 +183,9 @@ namespace EntityFramework.Utilities
                     }
                 };
 
+#pragma warning disable IDE0039 // 使用本地函数
                 Func<MappingFragment, Type> getClr = m =>
+#pragma warning restore IDE0039 // 使用本地函数
                 {
                     return GetClrTypeFromTypeMapping(metadata, objectItemCollection, m.TypeMapping as EntityTypeMapping);
                 };
@@ -190,10 +194,10 @@ namespace EntityFramework.Utilities
                 {
                     var withConditions = mapping.EntityTypeMappings.Where(m => m.Fragments[0].Conditions.Any()).ToList();
                     tableMapping.TPHConfiguration = new TPHConfiguration
-                       {
-                           ColumnName = withConditions.First().Fragments[0].Conditions[0].Column.Name,
-                           Mappings = new Dictionary<Type, string>()
-                       };
+                    {
+                        ColumnName = withConditions.First().Fragments[0].Conditions[0].Column.Name,
+                        Mappings = new Dictionary<Type, string>()
+                    };
                     foreach (var item in withConditions)
                     {
                         tableMapping.TPHConfiguration.Mappings.Add(
@@ -302,8 +306,7 @@ namespace EntityFramework.Utilities
         public static EfMapping GetMappingsForContext(DbContext context)
         {
             var type = context.GetType();
-            EfMapping mapping;
-            if (!cache.TryGetValue(type, out mapping))
+            if (!cache.TryGetValue(type, out EfMapping mapping))
             {
                 mapping = new EfMapping(context);
                 cache.Add(type, mapping);

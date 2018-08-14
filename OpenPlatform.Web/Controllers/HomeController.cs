@@ -64,15 +64,15 @@ namespace OpenPlatform.Web.Controllers
 
             }
             var db = DBContext.CreateContext();
-            var user = db.QQUser_info.Where(x => x.openId.Contains(oauthClient.Token.OAuthId)).FirstOrDefault();
+            var user = db.QQUser_info.Where(x => x.OpenId.Contains(oauthClient.Token.OAuthId)).FirstOrDefault();
             if (user == null)
             {
                 user = new QQUser_info
                 {
-                    nickname = oauthClient.Token.User.Nickname,
-                    openId = oauthClient.Token.OAuthId,
-                    figureurl = oauthClient.Token.User.AvatarUrl,
-                    gender = oauthClient.Token.User.Sex,
+                    Nickname = oauthClient.Token.User.Nickname,
+                    OpenId = oauthClient.Token.OAuthId,
+                    Figureurl = oauthClient.Token.User.AvatarUrl,
+                    Gender = oauthClient.Token.User.Sex,
                 };
                 db.QQUser_info.Add(user);
                 db.SaveChanges();
@@ -80,8 +80,8 @@ namespace OpenPlatform.Web.Controllers
                 str.AppendLine("<h2>恭喜您,QQ认证成功 </h2><br />");
                 str.AppendLine("****************获取信息begin**************** <br />");
                 str.AppendLine("获取到您的昵称:" + nickName + "大智障 <br />");
-                str.AppendLine("获取到您的openId:" + user.openId + "  <br />");
-                str.AppendLine("获取到您的头像: <img src=" + user.figureurl + "  />  <br /> ");
+                str.AppendLine("获取到您的openId:" + user.OpenId + "  <br />");
+                str.AppendLine("获取到您的头像: <img src=" + user.Figureurl + "  />  <br /> ");
                 str.AppendLine("****************获取信息end**************** <br /> ");
 
             }

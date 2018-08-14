@@ -11,8 +11,9 @@ namespace EFTest.Batch
 {
     public class Batch
     {
+       
         /// <summary>
-        /// There is already a repository named 'OpenPlatformOAuth2' for the current account.
+        /// 
         /// </summary>
         /// <returns></returns>
         private static IEnumerable<User_info> GetInsertDatas()
@@ -33,7 +34,6 @@ namespace EFTest.Batch
         /// </summary>
         public static void BatchInster()
         {
-
             var datas = GetInsertDatas();
             var testEntities = datas as IList<User_info> ?? datas.ToList();
 

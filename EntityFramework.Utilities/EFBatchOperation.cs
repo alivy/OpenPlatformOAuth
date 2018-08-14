@@ -82,12 +82,11 @@ namespace EntityFramework.Utilities
             this.set = set;
         }
 
+#pragma warning disable CS0693 // 类型参数与外部类型中的类型参数同名
         public static IEFBatchOperationBase<TContext, T> For<TContext, T>(TContext context, IDbSet<T> set)
+#pragma warning restore CS0693 // 类型参数与外部类型中的类型参数同名
             where TContext : DbContext
-            where T : class
-        {
-            return new EFBatchOperation<TContext, T>(context, set);
-        }
+            where T : class => new EFBatchOperation<TContext, T>(context, set);
 
         /// <summary>
         /// Bulk insert all items if the Provider supports it. Otherwise it will use the default insert unless Configuration.DisableDefaultFallback is set to true in which case it would throw an exception.

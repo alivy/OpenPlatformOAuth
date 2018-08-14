@@ -12,30 +12,30 @@ namespace Model
 
         [Required]
         [StringLength(50)]
-        public string openId { get; set; }
+        public string OpenId { get; set; }
 
         [StringLength(50)]
-        public string nickname { get; set; }
+        public string Nickname { get; set; }
 
         [StringLength(50)]
-        public string gender { get; set; }
+        public string Gender { get; set; }
 
         [StringLength(50)]
-        public string province { get; set; }
+        public string Province { get; set; }
 
         [StringLength(50)]
-        public string city { get; set; }
+        public string City { get; set; }
 
         [StringLength(50)]
-        public string year { get; set; }
+        public string Year { get; set; }
 
         [StringLength(1024)]
-        public string figureurl { get; set; }
+        public string Figureurl { get; set; }
 
         [StringLength(1024)]
-        public string figureurl_2 { get; set; }
+        public string Figureurl_2 { get; set; }
 
         [StringLength(1024)]
-        public string figureurl_qq_2 { get; set; }
+        public string Figureurl_qq_2 { get; set; }
     }
 }
